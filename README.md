@@ -78,7 +78,7 @@ add ( /api/add_user POST ) <br>
 {
     "api_key": "db11c36e-afa0-46d9-9a8e-1f1aa7fc797a",
     "data": {
-    	"name" : User name,
+    	"name" : "User name",
         "email": "mail@mail.com",
         "group" : {
             "id" : 2 / "name" : "Group name"
@@ -98,7 +98,7 @@ edit ( /api/edit_user POST) <br>
 {
     "api_key": "db11c36e-afa0-46d9-9a8e-1f1aa7fc797a",
     "data": {
-        "name": "User name", / "email": "tes11t@gmail.com",
+        "name": "User name", / "email": "mail@mail.com",
     },
     "filter" : {
         "email" : "mail@mail.com" / "id" : 2
@@ -128,7 +128,7 @@ addUserGroup ( /api/add_user_group POST ) <br>
     "api_key": "db11c36e-afa0-46d9-9a8e-1f1aa7fc797a",
     "data": {
     	"user" : {
-    		"email"  : "mail1@com" / "id" : 4
+    		"email"  : "mail@mail.com" / "id" : 4
     	},
         "group": {
         	"id" : 4
@@ -146,7 +146,7 @@ deleteUserGroup ( /api/delete_user_group POST ) <br>
     "api_key": "db11c36e-afa0-46d9-9a8e-1f1aa7fc797a",
     "data": {
     	"user" : {
-    		"email"  : "mail1@com" / "id" : 4
+    		"email"  : "mail@mail.com" / "id" : 4
     	},
         "group": {
         	"id" : 4

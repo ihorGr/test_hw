@@ -1,0 +1,67 @@
+version: '3.2'
+services:
+  mysql:
+    container_name: test-task-hw-mysql
+    ports:
+      - "3306:3306"
+    image: mysql:8.0
+    env_file:
+      - ./docker-conf/mysql/env/.env
+    volumes:
+      - ./docker-conf/mysql/env:/etc/env:ro
+      - ./docker-conf/mysql/initdb.d/z_grant_all_hasts_to_user.sh:/docker-entrypoint-initdb.d/z_grant_all_hasts_to_user.sh
+      - ./data-source:/var/lib/mysql
+    networks:
+      - test-task-hw-network
+
+  php-fpm:
+    container_name: test-task-hw-php-fpm
+    build:
+      context: ./docker-conf/fpm
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    ports:
+      - "9001"
+    volumes:
+      - ./:/var/www/test-task-hw
+    networks:
+      - test-task-hw-network
+
+  php-cli:
+    container_name: test-task-hw-php-cli
+    build:
+      context: ./docker-conf/cli
+      dockerfile: Dockerfile
+    volumes:
+      - ~/.ssh:/tmp/.ssh:ro
+      - ./:/var/www/test-task-hw
+    tty: true
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    networks:
+      - test-task-hw-network
+
+  nginx:
+    container_name: test-task-hw-nginx
+    build:
+      context: ./docker-conf/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/test-task-hw
+    depends_on:
+      - php-fpm
+    links:
+      - php-fpm
+    networks:
+      - test-task-hw-network
+
+networks:
+  test-task-hw-network:
+    driver: bridge
