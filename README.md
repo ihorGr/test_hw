@@ -1,6 +1,9 @@
+_Запуск_: <br>
+- Docker: docker-compose --project-directory ./ up --build <br>
+- БД: В php-cli уонтейнере выполнить php bin/console doctrine:migrations:migrate
 # **Client**
 
-Функционал реализован не до конца.
+Функционал работы команд реализован не до конца.
 
 # **Server**
 
